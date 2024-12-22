@@ -1,0 +1,13 @@
+2024-12-21 20:15:11,382 - INFO - Database connection established.
+2024-12-21 20:16:33,292 - INFO - Database connection established.
+2024-12-21 20:17:15,265 - INFO - Database connection established.
+2024-12-21 20:17:58,889 - INFO - Database connection established.
+2024-12-21 20:17:59,259 - INFO - Database connection established.
+2024-12-21 20:18:01,965 - ERROR - Database initialization failed: (psycopg2.OperationalError) could not translate host name "db" to address: Unknown host
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2024-12-21 20:20:23,138 - INFO - Database connection established.
+2024-12-21 20:20:23,378 - INFO - Database connection established.
+2024-12-21 20:20:26,061 - ERROR - Database initialization failed: (psycopg2.OperationalError) could not translate host name "db" to address: Unknown host
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
