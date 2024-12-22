@@ -1,22 +1,30 @@
-FROM python:3.13-slim
+# Backend Dockerfile
 
-# Set environment variables
-ENV DATABASE_URL=postgresql://bobby:8040@db:5432/jewelry_scraper
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONPATH=/app:/app/backend
+# Base image for Python
+FROM python:3.10-slim
 
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-# Install dependencies
-COPY requirements.txt .
-RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy the application code
-COPY . .
+# Copy requirements and install Python dependencies
+COPY backend/requirements.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the app port
-EXPOSE 8000
+# Copy the backend code
+COPY backend/ .
 
-# Command to run the application
-CMD ["python", "app.py"]
+# Set environment variables
+ENV FLASK_APP=app.py
+ENV FLASK_ENV=production
+
+# Expose the application port
+EXPOSE 5000
+
+# Run the Flask application
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]

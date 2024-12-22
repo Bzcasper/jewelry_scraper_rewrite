@@ -172,3 +172,102 @@ Configure and manage proxies to enhance scraping resilience. Refer to Configurat
 
 For more advanced configurations and customization, refer to the Advanced Features documentation.
 
+Monitoring Scraping Progress
+Real-time Updates: Monitor the progress through the DataDashboard component.
+Logs: Check the logs directory (backend/logs/) for detailed logs.
+2. Viewing Scraped Data
+Through Frontend
+DataTable: View all scraped products in a tabular format with sorting and filtering options.
+DataDashboard: Visualize data through charts and statistics for better insights.
+Through API
+Retrieve All Products:
+
+bash
+GET http://localhost:5000/products
+Filtered Retrieval: Add query parameters to filter results based on category, price, platform, etc.
+
+Through Database
+SQLite Database: Access the products.db SQLite database using any SQLite viewer for direct database interactions.
+3. Managing Data
+Exporting Data
+Export Formats: CSV, JSON, Excel.
+Procedure: Navigate to the export section in the frontend and choose your preferred format.
+Triggering Database Backup
+Manual Backup:
+
+bash
+Copy code
+GET http://localhost:5000/backup
+Backups are stored in the db_backups directory with timestamped filenames.
+
+Automated Backups: Scheduled backups can be set up using cron jobs or other scheduling tools.
+
+API Endpoints
+Scraping Endpoints
+Start Scraping Job:
+bash
+POST /scrape
+Payload:
+
+json
+{
+""query"": ""gold necklace"",
+""platform"": ""amazon"",
+""max_items"": 100
+}
+Check Job Status:
+
+bash
+GET /scrape/status/{job_id}
+Cancel Scraping Job:
+
+bash
+POST /scrape/cancel/{job_id}
+Product Endpoints
+Get Products:
+
+bash
+GET /products
+Query Parameters:
+
+platform
+category
+price_min
+price_max
+condition
+Delete Products:
+
+bash
+DELETE /products
+Export Products:
+
+bash
+Copy code
+GET /products/export
+Parameters: format (csv, json, excel)
+
+System Endpoints
+Get System Metrics:
+
+bash
+Copy code
+GET /system/status
+Get Performance Report:
+
+bash
+Copy code
+GET /system/report
+5. Monitoring
+Access the monitoring dashboard at def.
+
+Dashboard Features
+Active Jobs: View currently running scraping jobs.
+Success Rates: Monitor the success rate of scraping tasks.
+Resource Usage: Track CPU, memory, and network usage.
+Error Rates: View the frequency and types of errors encountered.
+Alerting
+Set up alerts for critical issues such as high error rates, slow response times, or resource constraints. Configure alerting rules in the monitoring tools (Prometheus/Grafana).
+
+Maintenance
+Regular Tasks
+Database Backup:
